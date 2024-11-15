@@ -1,8 +1,15 @@
 // lib/mongodb.ts
 
 import mongoose from "mongoose"
+import 'dotenv/config';
+console.log(process.env.MONGODB_URI); // Debug to check if the variable loads
 
-const MONGODB_URI = process.env.MONGODB_URI
+// Add type declaration for global mongoose
+declare global {
+  var mongoose: { conn: null | typeof mongoose; promise: null | Promise<typeof mongoose> }
+}
+
+const MONGODB_URI = process.env.MONGODB_URI || ''
 
 if (!MONGODB_URI) {
   throw new Error(

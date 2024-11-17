@@ -37,7 +37,7 @@ const SearchBar = () => {
       }
 
       setAlertMessage(''); // Clear any previous error messages
-      console.log(data.message); // Proceed with search results
+      console.log(data.matchingBlogs); // Proceed with search results
     } catch (error) {
       console.error('An error occurred:', error);
     }

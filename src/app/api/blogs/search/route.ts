@@ -1,11 +1,14 @@
 import { NextApiRequest } from 'next';
 import { NextResponse } from 'next/server';
+import dbConnect from "@/lib/mongodb";
+import Blog from '@/models/Blog'; // Assuming Blog is your mongoose model
 
 export async function POST(req: NextApiRequest) {
+  
 
-  console.log(req.method); // This will log the method
-
-  const { searchTerm } = await req.json(); // Using req.json() to get the body
+  // Extracting the search term from the request body
+  await dbConnect(); // Connect to the database
+  const { searchTerm } = await req.json();
 
   // Basic validation
   if (!searchTerm || typeof searchTerm !== 'string') {
@@ -23,6 +26,23 @@ export async function POST(req: NextApiRequest) {
     );
   }
 
-  // Proceed with search logic (dummy response here)
-  return NextResponse.json({ success: true, message: `Searching for ${searchTerm}` });
+  try {
+    console.log(`searching through blogs to find ${searchTerm}`);
+    // Search in the database: Title or Topics matching the search term (case-insensitive)
+    const matchingBlogs = await Blog.find({
+      $or: [
+        { title: { $regex: searchTerm, $options: 'i' } },
+        { topics: { $regex: searchTerm, $options: 'i' } }
+      ]
+    }).exec();
+    
+    // Return the blogs that matched the search term
+    return NextResponse.json({ success: true, matchingBlogs: matchingBlogs });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { success: false, error: 'An error occurred while searching for blogs.' },
+      { status: 500 }
+    );
+  }
 }

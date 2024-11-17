@@ -50,7 +50,7 @@ const SearchBar = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Search..."
-        onKeyPress={(e) => {
+        onKeyDown={(e) => {
           if (e.key === 'Enter') handleSearch();
         }}
       />

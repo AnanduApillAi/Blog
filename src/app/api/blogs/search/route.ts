@@ -2,7 +2,6 @@ import { NextApiRequest } from 'next';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: NextApiRequest) {
-  const res = NextResponse.json({});
 
   console.log(req.method); // This will log the method
 

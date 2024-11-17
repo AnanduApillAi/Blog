@@ -11,7 +11,7 @@ export default function BlogPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log(slug,"slug")
+    console.log(slug, "slug");
     const fetchBlog = async () => {
       try {
         const response = await fetch(`/api/blogs/${slug}`);
@@ -54,6 +54,21 @@ export default function BlogPage() {
       <p>
         <em>Published on:</em> {new Date(blog.createdAt).toLocaleDateString()}
       </p>
+
+      {/* Display topics as links */}
+      {blog.topics && blog.topics.length > 0 && (
+        <div>
+          <strong>Topics:</strong>
+          {blog.topics.map((topic, index) => (
+            <span key={index}>
+              <a href={`/topics/${topic}`} style={{ marginLeft: "8px" }}>
+                {topic}
+              </a>
+              {index < blog.topics.length - 1 && ", "}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

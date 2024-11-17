@@ -1,7 +1,16 @@
 "use client"
 import { useState } from 'react';
-
-const SearchBar = () => {
+interface SearchBarProps {
+    onSearchResults: (results: any[]) => {
+        title: string
+        slug: string
+        content: string
+        author: string
+        createdAt: Date
+        topics: string[]
+    };  
+  }
+const SearchBar = ({onSearchResults}:SearchBarProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
 
@@ -38,6 +47,7 @@ const SearchBar = () => {
 
       setAlertMessage(''); // Clear any previous error messages
       console.log(data.matchingBlogs); // Proceed with search results
+      onSearchResults(data.matchingBlogs)
     } catch (error) {
       console.error('An error occurred:', error);
     }

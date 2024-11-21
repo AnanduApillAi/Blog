@@ -1,16 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import BlogCard from "@/components/BlogCard";
+import BlogCard from "../components/BlogCard";
+import SearchBar from "../components/SearchBar";
 import { IBlog } from "@/models/blog";
-import SearchBar from "@/components/searchBar";
 
 export default function Home() {
   const [fetchedBlogs, setFetchedBlogs] = useState<IBlog[]>([]);
   const [searchResults, setSearchResults] = useState<IBlog[]>([]);
 
   useEffect(() => {
-    console.log("fetching blogs");
     const fetchBlogs = async () => {
       try {
         const response = await fetch("/api/blogs");
@@ -18,9 +17,8 @@ export default function Home() {
           throw new Error("Failed to fetch blogs");
         }
         const blogsData = await response.json();
-        console.log(blogsData, "blogsData");
         setFetchedBlogs(blogsData);
-        setSearchResults(blogsData);  // Initially, show all blogs in search results
+        setSearchResults(blogsData);
       } catch (error) {
         console.error("Error fetching blogs:", error);
       }
@@ -29,26 +27,25 @@ export default function Home() {
     fetchBlogs();
   }, []);
 
-  // Search handler function that updates the search results
   const handleSearchResults = (results: IBlog[]) => {
     setSearchResults(results);
   };
-
-  useEffect(()=>{
-    console.log(searchResults,'page levvel')
-  },[searchResults])
   
   return (
-    <div>
-      <h1>My Blog</h1>
-      <SearchBar onSearchResults={handleSearchResults} />
-      <div>
+    <div className="space-y-8">
+      <h1 className="text-3xl font-bold text-theme-primary">My Blogggg</h1>
+      
+      <div className="max-w-2xl">
+        <SearchBar onSearchResults={handleSearchResults} />
+      </div>
+      
+      <div className="space-y-6">
         {searchResults.length === 0 ? (
-          <p>No blogs found!</p>
+          <p className="text-center py-8 text-theme-secondary">No blogs found!</p>
         ) : (
-          searchResults.map((blog) => {
-            return <BlogCard key={blog._id} blog={blog} />;
-          })
+          searchResults.map((blog) => (
+            <BlogCard key={blog._id} blog={blog} />
+          ))
         )}
       </div>
     </div>

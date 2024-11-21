@@ -1,15 +1,23 @@
-import { useState } from 'react';
+// components/SearchBar.tsx
+"use client"
+import { useState, useEffect } from 'react';
 import { Search, Loader } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface SearchBarProps {
-  onSearchResults: (results: any[]) => void;
+  initialSearch?: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearchResults }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+const SearchBar: React.FC<SearchBarProps> = ({ initialSearch = '' }) => {
+  const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [alertMessage, setAlertMessage] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    setSearchTerm(initialSearch);
+  }, [initialSearch]);
 
   const validateInput = (input: string) => {
     if (!input.trim()) {
@@ -31,20 +39,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchResults }) => {
     try {
       setIsSearching(true);
       setAlertMessage('');
-      
-      const response = await fetch('/api/blogs/search', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ searchTerm }),
-      });
-      const data = await response.json();
-
-      if (!data.success) {
-        setAlertMessage(data.error);
-        return;
-      }
-
-      onSearchResults(data.matchingBlogs);
+      router.push(`/?q=${encodeURIComponent(searchTerm.trim())}`);
     } catch (error) {
       console.error('An error occurred:', error);
       setAlertMessage('An error occurred while searching');
@@ -56,13 +51,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchResults }) => {
   return (
     <div className="w-full max-w-2xl mx-auto">
       <div className="relative">
-        {/* Search icon */}
         <div className={`absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none
           ${isFocused ? 'text-accent-primary' : 'text-theme-tertiary'}`}>
           <Search size={20} />
         </div>
 
-        {/* Input field */}
         <input
           type="text"
           value={searchTerm}
@@ -88,7 +81,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchResults }) => {
           }}
         />
 
-        {/* Button inside input */}
         <div className="absolute right-2 top-1/2 -translate-y-1/2">
           <button
             onClick={handleSearch}
@@ -103,7 +95,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchResults }) => {
               relative
               text-theme-tertiary
               ${!searchTerm.trim() 
-                ? 'bg-theme-secondary ' 
+                ? 'bg-theme-secondary' 
                 : isSearching 
                   ? 'bg-accent-secondary text-theme-tertiary' 
                   : 'bg-accent-primary hover:bg-accent-secondary'
@@ -112,7 +104,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchResults }) => {
               disabled:cursor-not-allowed
             `}
           >
-            <span >
+            <span className="relative z-10">
               Search
             </span>
             {isSearching && (

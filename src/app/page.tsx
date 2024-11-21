@@ -1,53 +1,66 @@
-"use client";
-
+// app/page.tsx
+"use client"
 import { useEffect, useState } from "react";
-import BlogCard from "../components/BlogCard";
-import SearchBar from "../components/SearchBar";
+import { useSearchParams, useRouter } from "next/navigation";
+import BlogCard from "@/components/BlogCard";
+import SearchBar from "@/components/SearchBar";
 import { IBlog } from "@/models/blog";
 
-export default function Home() {
-  const [fetchedBlogs, setFetchedBlogs] = useState<IBlog[]>([]);
-  const [searchResults, setSearchResults] = useState<IBlog[]>([]);
+export default function HomePage() {
+  const [blogs, setBlogs] = useState<IBlog[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get('q');
 
   useEffect(() => {
-    const fetchBlogs = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch("/api/blogs");
-        if (!response.ok) {
-          throw new Error("Failed to fetch blogs");
+        setIsLoading(true);
+        let response;
+        
+        if (searchQuery) {
+          response = await fetch('/api/blogs/search', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ searchTerm: searchQuery }),
+          });
+        } else {
+          response = await fetch('/api/blogs');
         }
-        const blogsData = await response.json();
-        setFetchedBlogs(blogsData);
-        setSearchResults(blogsData);
+
+        if (!response.ok) throw new Error('Failed to fetch');
+        const data = await response.json();
+        setBlogs(searchQuery ? data.matchingBlogs : data);
       } catch (error) {
-        console.error("Error fetching blogs:", error);
+        console.error('Error:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    fetchBlogs();
-  }, []);
+    fetchData();
+  }, [searchQuery]);
 
-  const handleSearchResults = (results: IBlog[]) => {
-    setSearchResults(results);
-  };
-  
   return (
-    <div className="space-y-8">
-      <h1 className="text-3xl font-bold text-theme-primary">My Blogggg</h1>
-      
-      <div className="max-w-2xl">
-        <SearchBar onSearchResults={handleSearchResults} />
+    <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="mb-8 flex flex-col items-center">
+        <h1 className="text-3xl font-bold text-theme-primary mb-6">My Blog</h1>
+        
       </div>
-      
-      <div className="space-y-6">
-        {searchResults.length === 0 ? (
-          <p className="text-center py-8 text-theme-secondary">No blogs found!</p>
-        ) : (
-          searchResults.map((blog) => (
+
+      {isLoading ? (
+        <div className="text-center">Loading...</div>
+      ) : blogs.length === 0 ? (
+        <div className="text-center text-theme-secondary">
+          {searchQuery ? 'No blogs found for your search.' : 'No blogs available.'}
+        </div>
+      ) : (
+        <div className="space-y-6">
+          {blogs.map((blog) => (
             <BlogCard key={blog._id} blog={blog} />
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

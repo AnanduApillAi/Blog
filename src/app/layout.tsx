@@ -4,6 +4,7 @@
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import '../styles/global.css';
+import SearchBar from "@/components/SearchBar";
 
 export default function RootLayout({
   children,
@@ -35,6 +36,7 @@ export default function RootLayout({
     <html lang="en" className={isDarkMode ? 'dark' : ''}>
       <body className="bg-theme-primary text-theme-primary transition-colors duration-200">
         <Header onDarkModeToggle={toggleDarkMode} />
+        <SearchBar/>
         <main className="max-w-6xl mx-auto px-4 py-8">
           {children}
         </main>

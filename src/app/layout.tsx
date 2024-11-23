@@ -36,7 +36,10 @@ export default function RootLayout({
     <html lang="en" className={isDarkMode ? 'dark' : ''}>
       <body className="bg-theme-primary text-theme-primary transition-colors duration-200">
         <Header onDarkModeToggle={toggleDarkMode} />
-        <SearchBar/>
+        <div className="mt-20">
+          <SearchBar/>
+        </div>
+        
         <main className="max-w-6xl mx-auto px-4 py-8">
           {children}
         </main>

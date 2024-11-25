@@ -1,15 +1,14 @@
+"use client"
 // components/Header.tsx
 import React, { useState } from 'react';
 import { Menu, X, Search, Moon, Sun } from 'lucide-react';
 import Link from 'next/link';
 
-interface HeaderProps {
-  onDarkModeToggle: () => void;
-}
 
-const Header: React.FC<HeaderProps> = ({ onDarkModeToggle }) => {
+
+const Header= () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  
   return (
     <>
       {/* Mobile Menu Overlay */}
@@ -57,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ onDarkModeToggle }) => {
             </nav>
 
             <button 
-              onClick={onDarkModeToggle}
+              onClick={() => window.toggleTheme()}
               className="p-2 rounded-full text-theme-primary hover:bg-theme-tertiary transition-colors"
             >
               <Sun size={20} className="hidden dark:block" />

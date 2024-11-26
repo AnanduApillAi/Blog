@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Edit, Trash2, Plus } from 'lucide-react';
-import {IBlog} from '../../../models/blog'
+import { IBlog } from '@/models/blog';
+import Link from 'next/link';
 
 const BlogManagement = () => {
+  
   const [blogs, setBlogs] = useState<IBlog[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -20,6 +22,20 @@ const BlogManagement = () => {
       console.error('Error fetching blogs:', error);
     }
   };
+
+  const deleteBlog = async (blogId: string) => {
+    try {
+      const response = await fetch(`/api/blogs/${blogId}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) throw new Error('Failed to delete blog');
+      setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog._id !== blogId));
+    } catch (error) {
+      console.error('Error deleting blog:', error);
+    }
+  };
+
+  
 
   const filteredBlogs = blogs.filter((blog) =>
     blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -70,10 +86,17 @@ const BlogManagement = () => {
                 </td>
                 <td className="px-4 py-3">
                   <div className="flex justify-center gap-2">
-                    <button className="p-1 text-blue-500 hover:text-blue-700">
-                      <Edit size={20} />
-                    </button>
-                    <button className="p-1 text-red-500 hover:text-red-700">
+
+                    <Link href={`/admin/blogs/edit/${blog._id}`}>
+                      <button className="p-1 text-blue-500 hover:text-blue-700">
+                        <Edit size={20} />
+                      </button>
+                    </Link>
+
+                    <button
+                      className="p-1 text-red-500 hover:text-red-700"
+                      onClick={() => deleteBlog(blog._id)}
+                    >
                       <Trash2 size={20} />
                     </button>
                   </div>

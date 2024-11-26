@@ -12,8 +12,8 @@ const AdminPanel = () => {
         <button
           className={`px-4 py-2 rounded-lg transition-colors ${
             currentScreen === 'blog'
-              ? 'bg-accent-primary text-white hover:bg-accent-secondary'
-              : 'bg-theme-tertiary text-theme-primary hover:bg-theme-secondary'
+              ? 'bg-theme-tertiary text-theme-primary '
+              : 'bg-accent-primary text-theme-tertiary'
           }`}
           onClick={() => setCurrentScreen('blog')}
         >
@@ -22,8 +22,8 @@ const AdminPanel = () => {
         <button
           className={`ml-2 px-4 py-2 rounded-lg transition-colors ${
             currentScreen === 'topic'
-              ? 'bg-accent-primary text-white hover:bg-accent-secondary'
-              : 'bg-theme-tertiary text-theme-primary hover:bg-theme-secondary'
+              ? 'bg-theme-tertiary text-theme-primary'
+              : 'bg-accent-primary text-theme-tertiary'
           }`}
           onClick={() => setCurrentScreen('topic')}
         >

@@ -10,7 +10,7 @@ export async function generateStaticParams() {
     const { data: topics } = await res.json();
     
     return topics.map((topic: any) => ({
-      slug: topic.attributes.slug,
+      slug: topic.slug,
     }));
   } catch (error) {
     console.error('Error generating paths:', error);
@@ -55,23 +55,23 @@ async function getTopicData(slug: string) {
 
     const { data } = await res.json();
     const topic = data[0];
-
+    
     if (!topic) return null;
 
     return {
       id: topic.id,
-      name: topic.attributes.name,
-      description: topic.attributes.description,
-      blogs: topic.attributes.blogs.data.map((blog: any) => ({
+      name: topic.name,
+      description: topic.description,
+      blogs: topic.blogs.map((blog: any) => ({
         id: blog.id,
-        title: blog.attributes.title,
-        slug: blog.attributes.slug,
-        excerpt: blog.attributes.excerpts,
-        author: blog.attributes.author,
-        createdAt: blog.attributes.publishedAt,
-        topics: blog.attributes.topics.data.map((topic: any) => ({
-          name: topic.attributes.name,
-          slug: topic.attributes.slug
+        title: blog.title,
+        slug: blog.slug,
+        excerpts: blog.excerpts,
+        author: blog.author,
+        createdAt: blog.publishedAt,
+        topics: blog.topics.map((topic: any) => ({
+          name: topic.name,
+          slug: topic.slug
         }))
       }))
     };

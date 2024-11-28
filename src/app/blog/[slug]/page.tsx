@@ -1,52 +1,86 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import { IBlog } from "@/models/blog";
+// app/blog/[slug]/page.tsx
+import { notFound } from 'next/navigation';
 import { Calendar, Clock } from 'lucide-react';
 import Link from 'next/link';
+import RichText from '@/components/RichText';
+import type { Metadata } from 'next';
 
-export default function BlogPage() {
-  const { slug } = useParams();
-  const [blog, setBlog] = useState<IBlog | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+// Generate static paths at build time
+export async function generateStaticParams() {
+  try {
+    const res = await fetch(`${process.env.STRAPI_API_URL}/api/blogs`);
+    const { data: blogs } = await res.json();
+    
+    return blogs.map((blog: any) => ({
+      slug: blog.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating paths:', error);
+    return [];
+  }
+}
 
-  useEffect(() => {
-    const fetchBlog = async () => {
-      try {
-        const response = await fetch(`/api/blogs/${slug}`);
-        if (!response.ok) throw new Error("Failed to fetch the blog");
-        const data = await response.json();
-        setBlog(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+// Generate metadata for each blog post
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { slug: string } 
+}): Promise<Metadata> {
+  const slug = await params.slug;
+  const blog = await getBlogBySlug(slug);
+  
+  if (!blog) {
+    return {
+      title: 'Blog Not Found',
+      description: 'The requested blog post could not be found.'
     };
+  }
 
-    if (slug) fetchBlog();
-  }, [slug]);
+  return {
+    title: `${blog.title} | Your Blog Name`,
+    description: blog.excerpts,
+    openGraph: {
+      title: blog.title,
+      description: blog.excerpts,
+      type: 'article',
+      authors: [blog.author],
+      publishedTime: blog.publishedAt
+    }
+  };
+}
 
-  if (loading) return (
-    <div className="flex items-center justify-center min-h-screen">
-      <p className="text-lg">Loading...</p>
-    </div>
-  );
+async function getBlogBySlug(slug: string) {
+  try {
+    const res = await fetch(
+      `${process.env.STRAPI_API_URL}/api/blogs?filters[slug][$eq]=${slug}&populate=topics`,
+      {
+        next: { revalidate: 3600 }
+      }
+    );
 
-  if (error) return (
-    <div className="flex items-center justify-center min-h-screen">
-      <p className="text-red-500">Error: {error}</p>
-    </div>
-  );
+    if (!res.ok) {
+      throw new Error('Failed to fetch blog');
+    }
 
-  if (!blog) return (
-    <div className="flex items-center justify-center min-h-screen">
-      <p>No blog found.</p>
-    </div>
-  );
+    const { data } = await res.json();
+    return data[0];
+  } catch (error) {
+    console.error('Error:', error);
+    return null;
+  }
+}
+
+export default async function BlogPage({ 
+  params 
+}: { 
+  params: { slug: string } 
+}) {
+  const slug = await params.slug;
+  const blog = await getBlogBySlug(slug);
+  console.log(blog,'blogSingle')
+  if (!blog) {
+    notFound();
+  }
 
   return (
     <main className="max-w-4xl mx-auto px-4 py-8">
@@ -57,11 +91,11 @@ export default function BlogPage() {
           <div className="flex flex-wrap items-center gap-4 mb-6">
             <div className="flex items-center gap-2 text-gray-600">
               <Calendar size={16} />
-              <time>{new Date(blog.createdAt).toLocaleDateString()}</time>
+              <time>{new Date(blog.publishedAt).toLocaleDateString()}</time>
             </div>
             <div className="flex items-center gap-2 text-gray-600">
               <Clock size={16} />
-              <time>{new Date(blog.createdAt).toLocaleTimeString()}</time>
+              <time>{new Date(blog.publishedAt).toLocaleTimeString()}</time>
             </div>
           </div>
 
@@ -72,20 +106,20 @@ export default function BlogPage() {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            {blog.topics.map((topic, index) => (
-              <Link href={`/topics/${topic}`} key={index}>
-                <span className="px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-700 hover:opacity-80 transition-opacity">
-                  {topic}
-                </span>
+            {blog.topics.map((topic) => (
+              <Link 
+                href={`/topics/${topic.slug}`} 
+                key={topic.id}
+                className="px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-700 hover:opacity-80 transition-opacity"
+              >
+                {topic.name}
               </Link>
             ))}
           </div>
         </header>
 
         <div className="prose lg:prose-lg max-w-none">
-          <div className="mb-4 leading-relaxed text-gray-700">
-            {blog.content}
-          </div>
+          <RichText content={blog.content} />
         </div>
       </article>
     </main>

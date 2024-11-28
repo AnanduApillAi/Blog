@@ -1,48 +1,117 @@
 // app/topics/[slug]/page.tsx
-"use client"
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import BlogCard from '@/components/BlogCard';
-import { IBlog } from '@/models/blog';
+import type { Metadata } from 'next';
 
-export default function TopicPage() {
-  const { slug } = useParams();
-  const [blogs, setBlogs] = useState<IBlog[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+// Generate static paths for all topics
+export async function generateStaticParams() {
+  try {
+    const res = await fetch(`${process.env.STRAPI_API_URL}/api/topics`);
+    const { data: topics } = await res.json();
+    
+    return topics.map((topic: any) => ({
+      slug: topic.attributes.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating paths:', error);
+    return [];
+  }
+}
 
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const response = await fetch(`/api/topics/${slug}`);
-        if (!response.ok) throw new Error('Failed to fetch blogs');
-        const data = await response.json();
-        setBlogs(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load blogs');
-      } finally {
-        setIsLoading(false);
-      }
+// Generate metadata for each topic page
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { slug: string } 
+}): Promise<Metadata> {
+  const topic = await getTopicData(params.slug);
+  
+  if (!topic) {
+    return {
+      title: 'Topic Not Found',
+      description: 'The requested topic could not be found.'
     };
+  }
 
-    if (slug) fetchBlogs();
-  }, [slug]);
+  return {
+    title: `${topic.name} Posts | Your Blog Name`,
+    description: topic.description
+  };
+}
 
-  if (isLoading) return <div className="text-center py-8">Loading...</div>;
-  if (error) return <div className="text-center py-8 text-red-500">{error}</div>;
+// Fetch topic data and its blogs
+async function getTopicData(slug: string) {
+  try {
+    const res = await fetch(
+      `${process.env.STRAPI_API_URL}/api/topics?filters[slug][$eq]=${slug}&populate[blogs][populate]=topics`,
+      {
+        next: { revalidate: 3600 }
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch topic');
+    }
+
+    const { data } = await res.json();
+    const topic = data[0];
+
+    if (!topic) return null;
+
+    return {
+      id: topic.id,
+      name: topic.attributes.name,
+      description: topic.attributes.description,
+      blogs: topic.attributes.blogs.data.map((blog: any) => ({
+        id: blog.id,
+        title: blog.attributes.title,
+        slug: blog.attributes.slug,
+        excerpt: blog.attributes.excerpts,
+        author: blog.attributes.author,
+        createdAt: blog.attributes.publishedAt,
+        topics: blog.attributes.topics.data.map((topic: any) => ({
+          name: topic.attributes.name,
+          slug: topic.attributes.slug
+        }))
+      }))
+    };
+  } catch (error) {
+    console.error('Error:', error);
+    return null;
+  }
+}
+
+export default async function TopicPage({ 
+  params 
+}: { 
+  params: { slug: string } 
+}) {
+  const topic = await getTopicData(params.slug);
+
+  if (!topic) {
+    notFound();
+  }
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2 text-theme-primary capitalize">{slug as string} Posts</h1>
+        <h1 className="text-3xl font-bold mb-2 text-theme-primary">
+          {topic.name}
+        </h1>
+        <p className="text-theme-secondary mb-4">
+          {topic.description}
+        </p>
         <p className="text-theme-secondary">
-          Found {blogs.length} posts in this topic
+          Found {topic.blogs.length} posts in this topic
         </p>
       </div>
 
       <div className="space-y-6">
-        {blogs.map((blog) => (
-          <BlogCard key={blog._id} blog={blog} />
+        {topic.blogs.map((blog) => (
+          <BlogCard 
+            key={blog.id} 
+            blog={blog}
+          />
         ))}
       </div>
     </main>

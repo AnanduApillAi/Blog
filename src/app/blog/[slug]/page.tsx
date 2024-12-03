@@ -54,7 +54,7 @@ async function getBlogBySlug(slug: string) {
     const res = await fetch(
       `${process.env.STRAPI_API_URL}/api/blogs?filters[slug][$eq]=${slug}&populate=topics`,
       {
-        next: { revalidate: 3600 }
+        cache: 'no-store'
       }
     );
 
@@ -84,33 +84,43 @@ export default async function BlogPage({
 
   return (
     <main className="max-w-4xl mx-auto px-4 py-8">
-      <article>
-        <header className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">{blog.title}</h1>
-          
+      <article className="bg-theme-secondary rounded-xl shadow-sm overflow-hidden">
+        <header className="p-6 border-b border-theme-primary">
+          {/* Title */}
+          <h1 className="text-3xl md:text-4xl font-bold mb-6 text-theme-primary">
+            {blog.title}
+          </h1>
+
+          {/* Meta Information */}
           <div className="flex flex-wrap items-center gap-4 mb-6">
-            <div className="flex items-center gap-2 text-gray-600">
-              <Calendar size={16} />
+            <div className="flex items-center gap-2 text-theme-secondary">
+              <Calendar size={16} className="text-theme-tertiary" />
               <time>{new Date(blog.publishedAt).toLocaleDateString()}</time>
             </div>
-            <div className="flex items-center gap-2 text-gray-600">
-              <Clock size={16} />
+            <div className="flex items-center gap-2 text-theme-secondary">
+              <Clock size={16} className="text-theme-tertiary" />
               <time>{new Date(blog.publishedAt).toLocaleTimeString()}</time>
             </div>
           </div>
 
-          <div className="flex items-center gap-4 p-4 rounded-lg bg-gray-100 mb-6">
-            <div className="flex-1">
-              <div className="font-medium">By {blog.author}</div>
+          {/* Author Card */}
+          <div className="bg-theme-tertiary rounded-lg p-4 mb-6">
+            <div className="flex items-center gap-4">
+              <div className="flex-1">
+                <div className="font-medium text-theme-primary">
+                  By {blog.author}
+                </div>
+              </div>
             </div>
           </div>
 
+          {/* Topics */}
           <div className="flex flex-wrap gap-2">
-            {blog.topics.map((topic) => (
-              <Link 
-                href={`/topics/${topic.slug}`} 
+            {blog.topics.map((topic: any) => (
+              <Link
+                href={`/topics/${topic.slug}`}
                 key={topic.id}
-                className="px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-700 hover:opacity-80 transition-opacity"
+                className="px-3 py-1 rounded-full text-sm bg-theme-tertiary text-theme-primary hover:bg-theme-accent-primary hover:text-white transition-all duration-200"
               >
                 {topic.name}
               </Link>
@@ -118,8 +128,11 @@ export default async function BlogPage({
           </div>
         </header>
 
-        <div className="prose lg:prose-lg max-w-none">
-          <RichText content={blog.content} />
+        {/* Blog Content */}
+        <div className="p-6">
+          <div className="prose lg:prose-lg max-w-none dark:prose-invert prose-headings:text-theme-primary prose-p:text-theme-secondary prose-a:text-theme-accent-primary">
+            <RichText content={blog.content} />
+          </div>
         </div>
       </article>
     </main>

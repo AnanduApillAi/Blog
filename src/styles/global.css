@@ -89,54 +89,80 @@
   .hover-bg-theme { @apply hover:bg-theme-tertiary transition-colors; }
 }
 
+@layer utilities {
+  .prose {
+    --tw-prose-body: var(--text-secondary);
+    --tw-prose-headings: var(--text-primary);
+    --tw-prose-links: var(--accent-primary);
+    --tw-prose-bold: var(--text-primary);
+    --tw-prose-counters: var(--text-tertiary);
+    --tw-prose-bullets: var(--text-tertiary);
+    --tw-prose-hr: var(--border-primary);
+    --tw-prose-quotes: var(--text-primary);
+    --tw-prose-quote-borders: var(--border-primary);
+    --tw-prose-captions: var(--text-tertiary);
+    --tw-prose-code: var(--text-primary);
+    --tw-prose-pre-code: var(--text-secondary);
+    --tw-prose-pre-bg: var(--background-tertiary);
+    --tw-prose-th-borders: var(--border-primary);
+    --tw-prose-td-borders: var(--border-primary);
+  }
 
-/* Add these styles to make the editor content more visible */
+  .prose-invert {
+    --tw-prose-body: var(--text-secondary);
+    --tw-prose-headings: var(--text-primary);
+    --tw-prose-links: var(--accent-primary);
+    --tw-prose-bold: var(--text-primary);
+    --tw-prose-counters: var(--text-tertiary);
+    --tw-prose-bullets: var(--text-tertiary);
+    --tw-prose-hr: var(--border-primary);
+    --tw-prose-quotes: var(--text-primary);
+    --tw-prose-quote-borders: var(--border-primary);
+    --tw-prose-captions: var(--text-tertiary);
+    --tw-prose-code: var(--text-primary);
+    --tw-prose-pre-code: var(--text-secondary);
+    --tw-prose-pre-bg: var(--background-tertiary);
+    --tw-prose-th-borders: var(--border-primary);
+    --tw-prose-td-borders: var(--border-primary);
+  }
+}
+
+/* ProseMirror specific styles */
 .ProseMirror {
   min-height: 200px;
   padding: 1rem;
+  color: var(--text-primary);
+  background-color: var(--background-secondary);
 }
 
 .ProseMirror h1 {
-  font-size: 2em;
-  font-weight: bold;
-  margin: 1em 0;
+  @apply text-3xl font-bold mb-6 text-theme-primary;
 }
 
 .ProseMirror h2 {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin: 0.83em 0;
+  @apply text-2xl font-bold mb-4 text-theme-primary;
 }
 
 .ProseMirror ul {
-  list-style-type: disc;
-  padding-left: 2em;
-  margin: 1em 0;
+  @apply list-disc pl-6 my-4;
 }
 
 .ProseMirror ol {
-  list-style-type: decimal;
-  padding-left: 2em;
-  margin: 1em 0;
+  @apply list-decimal pl-6 my-4;
 }
 
 .ProseMirror li {
-  margin: 0.5em 0;
+  @apply my-2 text-theme-secondary;
 }
 
 .ProseMirror blockquote {
-  border-left: 3px solid #ccc;
-  margin-left: 0;
-  padding-left: 1em;
-  font-style: italic;
+  @apply border-l-4 border-theme-primary pl-4 italic my-4 text-theme-secondary;
 }
 
 .ProseMirror p {
-  margin: 1em 0;
+  @apply my-4 text-theme-secondary;
 }
 
 .ProseMirror hr {
-  border: none;
-  border-top: 2px solid #ccc;
-  margin: 2em 0;
+  @apply border-none border-t-2 border-theme-primary my-8;
 }

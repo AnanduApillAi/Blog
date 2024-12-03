@@ -22,7 +22,7 @@ async function getTopicsWithCategories() {
     // Fetch categories with their topics and related blogs
     const res = await fetch(`${process.env.STRAPI_API_URL}/api/categories?populate[topics][populate][blogs][count]=true&pagination[pageSize]=100`, {
     
-      next: { revalidate: 3600 }
+      cache: 'no-store'
     });
 
     if (!res.ok) {

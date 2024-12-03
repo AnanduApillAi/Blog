@@ -25,7 +25,6 @@ async function getBlogs() {
 
     const res = await fetch(url, {
       next: { revalidate: 3600 },
-      cache: 'force-cache'
     });
 
     if (!res.ok) {
@@ -35,6 +34,7 @@ async function getBlogs() {
     }
 
     const data = await res.json();
+    console.log(data,'dtaat')
 
     return data;
   } catch (error) {
@@ -70,6 +70,7 @@ export default async function HomePage({
     serverBlogs = await searchBlogs(query)
   } else {
     const { data } = await getBlogs()
+    console.log(data,'blogss')
     serverBlogs = data
   }
 

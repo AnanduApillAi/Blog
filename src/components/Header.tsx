@@ -57,7 +57,7 @@ const Header = () => {
                   <X size={24} />
                 </button>
               </div>
-              <nav className="space-y-4">
+              <nav className="space-y-4 flex flex-col md:flex-row">
                 <NavLinks />
               </nav>
             </div>
@@ -90,19 +90,21 @@ const Header = () => {
             </nav>
 
             {/* Theme Toggle */}
-            {mounted && (
+            
               <button 
                 onClick={toggleTheme}
                 className="p-2 rounded-full text-theme-primary hover:bg-theme-tertiary transition-colors"
                 aria-label="Toggle theme"
               >
-                {theme === 'dark' ? (
-                  <Sun size={20} className="transition-transform hover:rotate-12" />
-                ) : (
-                  <Moon size={20} className="transition-transform hover:-rotate-12" />
+                {mounted && (
+                  theme === 'dark' ? (
+                    <Sun size={20} className="transition-transform hover:rotate-12" />
+                  ) : (
+                    <Moon size={20} className="transition-transform hover:-rotate-12" />
+                  )
                 )}
               </button>
-            )}
+            
           </div>
         </div>
       </header>

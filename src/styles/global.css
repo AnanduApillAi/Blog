@@ -36,6 +36,15 @@
     --input-background: theme('colors.gray.100');
     --input-text: theme('colors.gray.800');
     --input-placeholder: theme('colors.gray.400');
+
+    /* Light theme variations */
+    --portfolio-bg: theme('colors.gray.50');
+    --portfolio-text: theme('colors.gray.900');
+    --portfolio-accent: theme('colors.indigo.500');
+    --portfolio-secondary: theme('colors.gray.600');
+    --portfolio-zinc: theme('colors.gray.200');
+    --portfolio-zinc-hover: theme('colors.gray.300');
+    --portfolio-accent-rgb: 99, 102, 241;
   }
 
   .dark {
@@ -69,6 +78,17 @@
     --input-background: theme('colors.gray.800');
     --input-text: theme('colors.gray.100');
     --input-placeholder: theme('colors.gray.500');
+
+
+
+    /* Dark theme colors remain same as portfolio's dark theme */
+    --portfolio-bg: theme('colors.black');
+    --portfolio-text: theme('colors.white');
+    --portfolio-accent: theme('colors.indigo.400');
+    --portfolio-secondary: theme('colors.gray.400');
+    --portfolio-zinc: theme('colors.zinc.900');
+    --portfolio-zinc-hover: theme('colors.zinc.800');
+    --portfolio-accent-rgb: 129, 140, 248;
   }
 }
 

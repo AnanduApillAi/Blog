@@ -16,7 +16,7 @@ const Header = () => {
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
-    document.cookie = `theme=${newTheme};path=/`;
+    
   };
 
   const NavLinks = () => (

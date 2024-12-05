@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, Code } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
+import Link from 'next/link';
 
 const TypeWriter = ({ text, speed = 100 }) => {
   const [displayText, setDisplayText] = useState('');
@@ -101,115 +102,129 @@ const Hero = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col justify-between relative">
-      <div className="portfolioHeader absolute top-8 right-8 z-50">
-        <ThemeToggle />
-      </div>
+    <section>
+        <div className="min-h-screen flex flex-col justify-between relative">
+        
 
-      {/* Navigation Indicator */}
-      <NavIndicator />
-
-      {/* Dot pattern background */}
-      <div className="absolute inset-0 grid grid-cols-12 gap-4 opacity-10">
-        {Array.from({ length: 96 }).map((_, i) => (
-          <div 
-            key={i} 
-            className="w-2 h-2 rounded-full"
-            style={{ background: 'var(--portfolio-secondary)' }}
-          />
-        ))}
-      </div>
-      
-      {/* Main content */}
-      <div className="flex-1 px-4 md:px-16 pt-16 pb-8 relative z-10">
-        <div className="space-y-8">
-          <h2 
-            className="text-xl sm:text-2xl font-medium flex items-center gap-2"
-            style={{ color: 'var(--portfolio-accent)' }}
-          >
-            <Code className="w-5 h-5 sm:w-6 sm:h-6" />
-            <TypeWriter text="Hello There," />
-          </h2>
-          
-          <h1 
-            className="text-5xl sm:text-6xl md:text-8xl font-bold"
-            style={{ color: 'var(--portfolio-text)' }}
-          >
-            <span className="text-3xl sm:text-4xl md:text-6xl font-bold mr-4 sm:mr-6 md:mr-8"
-                style={{ color: 'var(--portfolio-text)' }}>
-                    I'm
-            </span>
-            Anandu.
-          </h1>
-          
-          <div className="space-y-6 max-w-2xl">
-            <h2 
-              className="text-2xl sm:text-3xl font-semibold"
-              style={{ color: 'var(--portfolio-text)' }}
+        <div className="portfolioHeader absolute top-3 md:top-8 right-4 md:right-8 z-50 flex items-center justify-center  gap-8">
+          <Link href="/blog"
+              className="px-4 py-1 rounded-lg bg-[#1a1b26] text-theme-tertiary transition-all duration-200 hover:text-theme-secondary"
+              style={{ 
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)'
+              }}
             >
-              Software Engineer / Full Stack Developer
+              Blog
+          </Link>
+          <ThemeToggle />
+        </div>
+  
+        {/* Navigation Indicator */}
+        <NavIndicator />
+  
+        {/* Dot pattern background */}
+        <div className="absolute inset-0 grid grid-cols-12 gap-4 opacity-10">
+          {Array.from({ length: 96 }).map((_, i) => (
+            <div 
+              key={i} 
+              className="w-2 h-2 rounded-full"
+              style={{ background: 'var(--portfolio-secondary)' }}
+            />
+          ))}
+        </div>
+        
+        {/* Main content */}
+        <div className="flex-1 px-4 md:px-16 pt-16 pb-8 relative z-10">
+          <div className="space-y-8">
+            <h2 
+              className="text-xl sm:text-2xl font-medium flex items-center gap-2"
+              style={{ color: 'var(--portfolio-accent)' }}
+            >
+              <Code className="w-5 h-5 sm:w-6 sm:h-6" />
+              <TypeWriter text="Hello There," />
             </h2>
             
-            <p style={{ color: 'var(--portfolio-secondary)' }} className="text-lg sm:text-xl">
-              I specialize in building seamless, scalable, and accessible digital solutions for the web.
-            </p>
-          </div>
-
-          {/* Social Links */}
-          <div className="flex gap-4">
-            {[
-              { Icon: Github, label: 'Github', href: '#' },
-              { Icon: Linkedin, label: 'LinkedIn', href: '#' },
-              { Icon: Mail, label: 'Email', href: 'mailto:example@email.com' }
-            ].map(({ Icon, label, href }) => (
-              <a
-                key={label}
-                href={href}
-                className="p-3 sm:p-4 rounded-md transition-all duration-200 group transform hover:-translate-y-1"
-                style={{ 
-                  background: 'var(--portfolio-zinc)',
-                  color: 'var(--portfolio-text)',
-                  ':hover': {
-                    background: 'var(--portfolio-zinc-hover)'
-                  }
-                }}
-                aria-label={label}
+            <h1 
+              className="text-5xl sm:text-6xl md:text-8xl font-bold"
+              style={{ color: 'var(--portfolio-text)' }}
+            >
+              <span className="text-3xl sm:text-4xl md:text-6xl font-bold mr-4 sm:mr-6 md:mr-8"
+                  style={{ color: 'var(--portfolio-text)' }}>
+                      I'm
+              </span>
+              Anandu.
+            </h1>
+            
+            <div className="space-y-6 max-w-2xl">
+              <h2 
+                className="text-2xl sm:text-3xl font-semibold"
+                style={{ color: 'var(--portfolio-text)' }}
               >
-                <Icon 
-                  className="w-4 h-4 sm:w-5 sm:h-5 transition-colors"
-                  style={{ color: 'var(--portfolio-text)' }}
-                />
-              </a>
-            ))}
+                Software Engineer / Full Stack Developer
+              </h2>
+              
+              <p style={{ color: 'var(--portfolio-secondary)' }} className="text-lg sm:text-xl">
+                I specialize in building seamless, scalable, and accessible digital solutions for the web.
+              </p>
+            </div>
+  
+            {/* Social Links */}
+            <div className="flex gap-4">
+              {[
+                { Icon: Github, label: 'Github', href: '#' },
+                { Icon: Linkedin, label: 'LinkedIn', href: '#' },
+                { Icon: Mail, label: 'Email', href: 'mailto:example@email.com' }
+              ].map(({ Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  className="p-3 sm:p-4 rounded-md transition-all duration-200 group transform hover:-translate-y-1"
+                  style={{ 
+                    background: 'var(--portfolio-zinc)',
+                    color: 'var(--portfolio-text)',
+                    ':hover': {
+                      background: 'var(--portfolio-zinc-hover)'
+                    }
+                  }}
+                  aria-label={label}
+                >
+                  <Icon 
+                    className="w-4 h-4 sm:w-5 sm:h-5 transition-colors"
+                    style={{ color: 'var(--portfolio-text)' }}
+                  />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* Tech stack section - Fixed at bottom */}
-      <div className="w-full pb-8 px-4 md:px-16">
-        <div className="max-w-full md:max-w-[60%] space-y-3">
-          <TechStackScroll techs={frontendTechs} direction="right" type="frontend" />
-          <TechStackScroll techs={backendTechs} direction="left" type="backend" />
+  
+        {/* Tech stack section - Fixed at bottom */}
+        <div className="w-full pb-8 px-4 md:px-16">
+          <div className="max-w-full md:max-w-[60%] space-y-3">
+            <TechStackScroll techs={frontendTechs} direction="right" type="frontend" />
+            <TechStackScroll techs={backendTechs} direction="left" type="backend" />
+          </div>
         </div>
+  
+        <style jsx global>{`
+          @keyframes scroll-right {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          @keyframes scroll-left {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+          }
+          .animate-scroll-right {
+            animation: scroll-right 20s linear infinite;
+          }
+          .animate-scroll-left {
+            animation: scroll-left 20s linear infinite;
+          }
+        `}</style>
       </div>
-
-      <style jsx global>{`
-        @keyframes scroll-right {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        @keyframes scroll-left {
-          0% { transform: translateX(-50%); }
-          100% { transform: translateX(0); }
-        }
-        .animate-scroll-right {
-          animation: scroll-right 20s linear infinite;
-        }
-        .animate-scroll-left {
-          animation: scroll-left 20s linear infinite;
-        }
-      `}</style>
-    </div>
+    </section>
+    
   );
 };
 

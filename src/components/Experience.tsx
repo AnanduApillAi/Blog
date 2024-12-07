@@ -3,20 +3,40 @@
 const Experience = () => {
   const experiences = [
     {
-      title: "Senior Frontend Engineer",
-      company: "Tech Corp",
-      period: "2022 - Present",
-      description: "Lead frontend development for multiple high-impact projects. Implemented performant, accessible web applications using React and Next.js.",
-      technologies: ["React", "TypeScript", "Next.js", "TailwindCSS"]
+      title: "Full Stack Developer",
+      company: "Tapclone",
+      period: "November 2022 - June 2023",
+      description: `
+        Worked on building fast, user-friendly web applications that tackled real-world business problems. 
+        Focused on improving the frontend experience using React.js while ensuring the backend was robust and efficient. 
+        Collaborated closely with the team to deliver projects on time and with great results.
+      `,
+      technologies: ["React", "Javascript", "TailwindCSS", "Node.js"]
     },
     {
       title: "Full Stack Developer",
-      company: "Digital Solutions",
-      period: "2020 - 2022",
-      description: "Developed and maintained full-stack applications. Worked with diverse tech stack and implemented various client solutions.",
-      technologies: ["Node.js", "React", "MongoDB", "Express"]
+      company: "Extravelmoney",
+      period: "July 2023 - Present",
+      description: `
+        Played a key role in developing and improving their website and dashboards. 
+        Worked on making the user interface intuitive and the backend workflows seamless. 
+        Took ownership of PHP tasks, improving efficiency and reliability across their systems.
+      `,
+      technologies: ["PHP", "React", "Node.js", "Express", "MySQL","MongoDB"]
+    },
+    {
+      title: "Front-End Consultant",
+      company: "Veeble Hosting",
+      period: "2024 - Present",
+      description: `
+        Providing front-end expertise to enhance the look and feel of their hosting platform. 
+        Focused on creating clean, responsive designs and ensuring a smooth user experience. 
+        Worked closely with the team to align the frontend with their technical goals.
+      `,
+      technologies: ["React", "CSS", "HTML", "JavaScript"]
     }
   ];
+  
 
   return (
     <section id="experience" className="min-h-screen flex flex-col justify-center relative py-16 px-4 md:px-16 w-full lg:w-[80%]">

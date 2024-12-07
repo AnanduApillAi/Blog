@@ -35,7 +35,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
         </div>
         
         {/* Title and Link */}
-        <Link href={`/blogs/${blog.slug}`}>
+        <Link href={`/blog/${blog.slug}`}>
           <h2 className="text-xl font-bold mb-2 text-theme-primary hover:text-accent-primary transition-colors">
             {blog.title}
           </h2>

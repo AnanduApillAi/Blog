@@ -33,8 +33,10 @@ export async function generateMetadata({
     };
   }
 
+  
+
   return {
-    title: `${topic.name} Posts | Your Blog Name`,
+    title: `${topic.name} Posts`,
     description: topic.description
   };
 }

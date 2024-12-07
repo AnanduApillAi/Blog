@@ -121,7 +121,7 @@ function RichText({ content }: { content: ContentNode[] }) {
                 src={imageNode.image.url}
                 alt={imageNode.image.alternativeText || ''}
                 fill
-                className="object-cover transition-transform duration-300 hover:scale-105"
+                className="object-cover transition-transform duration-300"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>

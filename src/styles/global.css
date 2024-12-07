@@ -5,6 +5,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   :root {
     /* Background colors */
     --background-primary: theme('colors.gray.50');
@@ -187,3 +190,18 @@
   @apply border-none border-t-2 border-theme-primary my-8;
 }
 
+.active {
+  opacity: 1 !important;
+}
+
+.group-hover:not(.active) {
+  opacity: 0.6;
+}
+
+.active-line {
+  width: 5rem !important;
+}
+
+.group-hover:not(.active-line) {
+  width: 3rem !important;
+}

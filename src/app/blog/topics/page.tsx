@@ -67,7 +67,7 @@ export default async function TopicsPage() {
               {category.topics.map((topic) => (
                 <Link 
                   key={topic.id} 
-                  href={`/topics/${topic.slug}`}
+                  href={`/blog/topics/${topic.slug}`}
                   className="block"
                 >
                   <div className="bg-theme-tertiary p-4 rounded-lg hover:bg-opacity-90 transition-all h-full">
@@ -96,7 +96,7 @@ export default async function TopicsPage() {
 
 export function generateMetadata() {
   return {
-    title: 'Topics | Your Blog Name',
+    title: 'Topics',
     description: 'Explore our collection of articles by category'
   };
 }

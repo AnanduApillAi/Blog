@@ -24,12 +24,10 @@ const Header = () => {
       <Link href="/" className="text-theme-primary hover:text-accent-primary transition-colors">
         Home
       </Link>
-      <Link href="/topics" className="text-theme-primary hover:text-accent-primary transition-colors">
+      <Link href="/blog/topics" className="text-theme-primary hover:text-accent-primary transition-colors">
         Topics
       </Link>
-      <Link href="/about" className="text-theme-primary hover:text-accent-primary transition-colors">
-        About
-      </Link>
+      
     </>
   );
 
@@ -48,7 +46,7 @@ const Header = () => {
             <div className="p-4">
               <div className="flex justify-between items-center mb-8">
                 <Link href="/" className="text-xl font-bold text-theme-primary">
-                  MONO
+                {"<A/>"}
                 </Link>
                 <button 
                   onClick={() => setIsMenuOpen(false)} 
@@ -80,7 +78,7 @@ const Header = () => {
             {/* Logo */}
             <div className="flex items-center space-x-4">
               <Link href="/" className="text-xl font-bold text-theme-primary hover:text-accent-primary transition-colors">
-                MONO
+              {"<A/>"}
               </Link>
             </div>
 

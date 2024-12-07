@@ -1,6 +1,10 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, Code } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+
+import { FaGithub, FaLinkedinIn, FaTwitter, FaReddit } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { BiCode } from "react-icons/bi";
+import { SiX } from "react-icons/si";
 import { ThemeToggle } from './ThemeToggle';
 import Link from 'next/link';
 
@@ -32,39 +36,97 @@ const TypeWriter = ({ text, speed = 100 }) => {
   );
 };
 
-const NavIndicator = () => (
-    <div className="fixed bottom-16 right-12 hidden lg:flex flex-col items-start space-y-6 z-20">
+const NavIndicator = () => {
+  const sectionsRef = useRef<{ [key: string]: boolean }>({});
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-50% 0px -50% 0px' }
+    );
+
+    ['home','about', 'experience', 'projects', 'blogs'].forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) {
+        observer.observe(section);
+        sectionsRef.current[id] = true;
+      }
+    });
+
+    return () => {
+      Object.keys(sectionsRef.current).forEach((id) => {
+        const section = document.getElementById(id);
+        if (section) {
+          observer.unobserve(section);
+        }
+      });
+      observer.disconnect();
+    };
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    setTimeout(() => {
+      const section = document.querySelector(`#${sectionId}`);
+      if (section) {
+        const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+        const top = section.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+        window.scrollTo({
+          top,
+          behavior: 'smooth',
+        });
+      }
+    }, 100);
+  };
+
+  return (
+    <div className="fixed bottom-28 right-12 hidden lg:flex flex-col items-start space-y-6 z-20">
       {[
-        { label: 'ABOUT', href: '#' },
-        { label: 'EXPERIENCE', href: '#' },
-        { label: 'PROJECTS', href: '#' },
+        { label: 'Home', sectionId: 'home' },
+        { label: 'ABOUT', sectionId: 'about' },
+        { label: 'EXPERIENCE', sectionId: 'experience' },
+        { label: 'PROJECTS', sectionId: 'projects' },
+        { label: 'BLOGS', sectionId: 'blogs' },
       ].map((item) => (
-        <a
+        <button
           key={item.label}
-          href={item.href}
-          className="group flex items-center transition-all duration-300"
+          onClick={() => scrollToSection(item.sectionId)}
+          className={`group flex items-center transition-all duration-100 bg-transparent border-0 cursor-pointer ${
+            activeSection === item.sectionId ? 'active' : ''
+          }`}
         >
-          <div className="w-20">  {/* Fixed width container for line */}
-            <div 
-              className="w-12 h-[2px] ml-auto transition-all duration-300 group-hover:w-20"
+          <div className="w-20">
+            <div
+              className={`w-12 h-[2px] ml-auto transition-all duration-100 group-hover:w-20 ${
+                activeSection === item.sectionId ? 'active-line' : ''
+              }`}
               style={{
                 background: 'var(--portfolio-secondary)',
-                backgroundImage: 'linear-gradient(to right, var(--portfolio-accent), var(--portfolio-secondary))'
+                backgroundImage: 'linear-gradient(to right, var(--portfolio-accent), var(--portfolio-secondary))',
               }}
             />
           </div>
           <span
-            className="text-lg tracking-wider font-light opacity-60 group-hover:opacity-100 transition-all duration-300 ml-4"
+            className={`text-lg tracking-wider font-light transition-all duration-100 ml-4 ${
+              activeSection === item.sectionId ? 'active' : 'group-hover:opacity-100'
+            }`}
             style={{
               color: 'var(--portfolio-secondary)',
             }}
           >
             {item.label}
           </span>
-        </a>
+        </button>
       ))}
     </div>
   );
+};
 
 const TechStackScroll = ({ techs, direction = 'right', type }) => (
   <div className="overflow-hidden whitespace-nowrap py-1">
@@ -98,7 +160,7 @@ const Hero = () => {
   ];
   
   const backendTechs = [
-    'Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'Python', 'Django', 'REST APIs'
+    'Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'REST APIs'
   ];
 
   return (
@@ -140,7 +202,7 @@ const Hero = () => {
               className="text-xl sm:text-2xl font-medium flex items-center gap-2"
               style={{ color: 'var(--portfolio-accent)' }}
             >
-              <Code className="w-5 h-5 sm:w-6 sm:h-6" />
+              <BiCode className="w-5 h-5 sm:w-6 sm:h-6" />
               <TypeWriter text="Hello There," />
             </h2>
             
@@ -171,16 +233,18 @@ const Hero = () => {
             {/* Social Links */}
             <div className="flex gap-4">
               {[
-                { Icon: Github, label: 'Github', href: '#' },
-                { Icon: Linkedin, label: 'LinkedIn', href: '#' },
-                { Icon: Mail, label: 'Email', href: 'mailto:example@email.com' }
+                { Icon: FaGithub, label: 'Github', href: 'https://github.com/AnanduA-6' },
+                { Icon: FaLinkedinIn, label: 'LinkedIn', href: 'https://www.linkedin.com/in/anandu-dev/' },
+                { Icon: MdEmail, label: 'Email', href: 'anandu.a.dev@gmail.com' },
+                { Icon: SiX, label: 'Twiiter', href: 'https://x.com/anandu_a_dev' },
+                { Icon: FaReddit, label: 'Reddit', href: 'https://x.com/anandu_a_dev' }
               ].map(({ Icon, label, href }) => (
                 <a
                   key={label}
                   href={href}
                   className="p-3 sm:p-4 rounded-md transition-all duration-200 group transform hover:-translate-y-1"
                   style={{ 
-                    background: 'var(--portfolio-zinc)',
+                    
                     color: 'var(--portfolio-text)',
                     ':hover': {
                       background: 'var(--portfolio-zinc-hover)'
@@ -223,6 +287,7 @@ const Hero = () => {
           }
         `}</style>
       </div>
+      
     </section>
     
   );

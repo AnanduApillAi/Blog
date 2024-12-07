@@ -37,7 +37,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${blog.title} | Your Blog Name`,
+    title: `${blog.title} `,
     description: blog.excerpts,
     openGraph: {
       title: blog.title,
@@ -83,7 +83,7 @@ export default async function BlogPage({
   }
 
   return (
-    <main className="max-w-4xl mx-auto px-4 py-8">
+    <main className="px-4 py-8">
       <article className="bg-theme-secondary rounded-xl shadow-sm overflow-hidden">
         <header className="p-6 border-b border-theme-primary">
           {/* Title */}

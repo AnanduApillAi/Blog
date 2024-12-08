@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 // app/blog/[slug]/not-found.tsx
 export default function NotFound() {
     return (
@@ -7,7 +9,7 @@ export default function NotFound() {
             Blog Post Not Found
           </h2>
           <p className="text-theme-secondary mb-6">
-            The blog post you're looking for doesn't exist or has been removed.
+            The blog post you&apos;re looking for doesn&apos;t exist or has been removed.
           </p>
           <Link 
             href="/" 

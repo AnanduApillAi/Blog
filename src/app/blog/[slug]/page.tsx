@@ -5,13 +5,27 @@ import Link from 'next/link';
 import RichText from '@/components/RichText';
 import type { Metadata } from 'next';
 
-// Generate static paths at build time
+interface BlogType {
+  slug: string;
+  title: string;
+  excerpts: string;
+  content: string;
+  publishedAt: string;
+  author: string;
+  topics: { id: number; slug: string; name: string }[];
+}
+
+interface PageProps {
+  params: Promise<{ slug: string }>;
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
 export async function generateStaticParams() {
   try {
     const res = await fetch(`${process.env.STRAPI_API_URL}/api/blogs`);
     const { data: blogs } = await res.json();
     
-    return blogs.map((blog: any) => ({
+    return blogs.map((blog: BlogType) => ({
       slug: blog.slug,
     }));
   } catch (error) {
@@ -20,13 +34,8 @@ export async function generateStaticParams() {
   }
 }
 
-// Generate metadata for each blog post
-export async function generateMetadata({ 
-  params 
-}: { 
-  params: { slug: string } 
-}): Promise<Metadata> {
-  const slug = await params.slug;
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
   const blog = await getBlogBySlug(slug);
   
   if (!blog) {
@@ -37,7 +46,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${blog.title} `,
+    title: `${blog.title}`,
     description: blog.excerpts,
     openGraph: {
       title: blog.title,
@@ -70,14 +79,10 @@ async function getBlogBySlug(slug: string) {
   }
 }
 
-export default async function BlogPage({ 
-  params 
-}: { 
-  params: { slug: string } 
-}) {
-  const slug = await params.slug;
+export default async function BlogPage({ params }: PageProps) {
+  const { slug } = await params;
   const blog = await getBlogBySlug(slug);
-  console.log(blog,'blogSingle')
+
   if (!blog) {
     notFound();
   }
@@ -116,7 +121,7 @@ export default async function BlogPage({
 
           {/* Topics */}
           <div className="flex flex-wrap gap-2">
-            {blog.topics.map((topic: any) => (
+            {blog.topics.map((topic: { id: number; slug: string; name: string }) => (
               <Link
                 href={`/topics/${topic.slug}`}
                 key={topic.id}

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 
-import { FaGithub, FaLinkedinIn, FaTwitter, FaReddit } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn, FaReddit } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { BiCode } from "react-icons/bi";
 import { SiX } from "react-icons/si";
@@ -61,7 +61,8 @@ const NavIndicator = () => {
     });
 
     return () => {
-      Object.keys(sectionsRef.current).forEach((id) => {
+      const currentSectionsRef = sectionsRef.current;
+      Object.keys(currentSectionsRef).forEach((id) => {
         const section = document.getElementById(id);
         if (section) {
           observer.unobserve(section);
@@ -128,7 +129,7 @@ const NavIndicator = () => {
   );
 };
 
-const TechStackScroll = ({ techs, direction = 'right', type }) => (
+const TechStackScroll = ({ techs, direction = 'right' }) => (
   <div className="overflow-hidden whitespace-nowrap py-1">
     <div 
       className={`inline-block animate-scroll-${direction}`}
@@ -212,7 +213,7 @@ const Hero = () => {
             >
               <span className="text-3xl sm:text-4xl md:text-6xl font-bold mr-4 sm:mr-6 md:mr-8"
                   style={{ color: 'var(--portfolio-text)' }}>
-                      I'm
+                      I&apos;m
               </span>
               Anandu.
             </h1>
@@ -265,8 +266,8 @@ const Hero = () => {
         {/* Tech stack section - Fixed at bottom */}
         <div className="w-full pb-8 px-4 md:px-16">
           <div className="max-w-full md:max-w-[60%] space-y-3">
-            <TechStackScroll techs={frontendTechs} direction="right" type="frontend" />
-            <TechStackScroll techs={backendTechs} direction="left" type="backend" />
+            <TechStackScroll techs={frontendTechs} direction="right" />
+            <TechStackScroll techs={backendTechs} direction="left" />
           </div>
         </div>
   

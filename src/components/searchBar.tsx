@@ -37,7 +37,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ initialSearch = '' }) => {
     try {
       setIsSearching(true);
       setAlertMessage('');
-      router.push(`/?q=${encodeURIComponent(searchTerm.trim())}`);
+      router.push(`/blog?q=${encodeURIComponent(searchTerm.trim())}`);
     } catch (error) {
       console.error('An error occurred:', error);
       setAlertMessage('An error occurred while searching');

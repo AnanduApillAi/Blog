@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Search, Moon, Sun } from 'lucide-react';
+import { Menu, X, Moon, Sun } from 'lucide-react';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 
@@ -24,7 +24,7 @@ const Header = () => {
       <Link href="/" className="text-theme-primary hover:text-accent-primary transition-colors">
         Home
       </Link>
-      <Link href="/blog/topics" className="text-theme-primary hover:text-accent-primary transition-colors">
+      <Link href="/topics" className="text-theme-primary hover:text-accent-primary transition-colors">
         Topics
       </Link>
       

@@ -55,7 +55,7 @@ export default function ClientSearch() {
           <p className="text-theme-secondary">Searching...</p>
         ) : (
           <p className="text-theme-secondary">
-            Found {searchResults.length} articles matching "{query}"
+            Found {searchResults.length} articles matching &quot;{query}&quot;
           </p>
         )}
       </div>

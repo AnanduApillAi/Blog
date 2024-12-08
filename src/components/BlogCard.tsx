@@ -2,10 +2,7 @@
 import Link from 'next/link';
 import { Calendar } from 'lucide-react';
 
-interface Topic {
-  name: string;
-  slug: string;
-}
+
 
 interface BlogCardProps {
   blog: {

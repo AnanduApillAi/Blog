@@ -1,33 +1,39 @@
-export async function getBlogs() {
-  const strapiUrl = process.env.STRAPI_API_URL;
-  const strapiToken = process.env.STRAPI_API_TOKEN;
-  
-  if (!strapiUrl || !strapiToken) {
-    console.error('Missing required environment variables');
-    return { data: [] };
-  }
+import {NextResponse } from "next/server";
 
+
+
+export async function GET() {
   try {
-    const url = `${strapiUrl}/api/blogs?populate=topics&fields[0]=title&fields[1]=slug&fields[2]=publishedAt&fields[3]=author&fields[4]=excerpts&fields[5]=documentId&sort[0]=publishedAt:desc`;
-    
-    const res = await fetch(url, {
-      next: { revalidate: 3600 },
+
+    const url = `${process.env.STRAPI_API_URL}/api/blogs?populate=topics&fields[0]=title&fields[1]=slug&fields[2]=publishedAt&fields[3]=author&fields[4]=excerpts&fields[5]=documentId&sort[0]=publishedAt:desc`;
+
+    const response = await fetch(url, {
+
       headers: {
-        'Authorization': `Bearer ${strapiToken}`,
-        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${process.env.STRAPI_API_TOKEN}`
       },
     });
 
-    if (!res.ok) {
-      const errorText = await res.text();
-      console.error('Error response:', errorText);
-      throw new Error(`Failed to fetch blogs: ${res.status} ${res.statusText}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch blogs: ${response.statusText}`);
     }
 
-    const data = await res.json();
-    return data;
+    const data = await response.json();
+
+    return NextResponse.json({
+      success: true,
+      blogs: data.data || []
+    });
+
   } catch (error) {
-    console.error('Error:', error);
-    return { data: [] };
+    console.error("Error fetching blogs:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Failed to fetch blogs",
+        details: error.message
+      },
+      { status: 500 }
+    );
   }
 }

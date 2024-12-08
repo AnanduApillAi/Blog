@@ -9,7 +9,7 @@ export async function generateStaticParams() {
     const res = await fetch(`${process.env.STRAPI_API_URL}/api/topics`);
     const { data: topics } = await res.json();
     
-    return topics.map((topic: any) => ({
+    return topics.map((topic: { slug: string; }) => ({
       slug: topic.slug,
     }));
   } catch (error) {
@@ -64,14 +64,14 @@ async function getTopicData(slug: string) {
       id: topic.id,
       name: topic.name,
       description: topic.description,
-      blogs: topic.blogs.map((blog: any) => ({
+      blogs: topic.blogs.map((blog: { id: string; title: string; slug: string; excerpts: string; author: string; publishedAt: string; topics: { name: string; slug: string; }[]; }) => ({
         id: blog.id,
         title: blog.title,
         slug: blog.slug,
         excerpts: blog.excerpts,
         author: blog.author,
         createdAt: blog.publishedAt,
-        topics: blog.topics.map((topic: any) => ({
+        topics: blog.topics.map((topic: { name: string; slug: string; }) => ({
           name: topic.name,
           slug: topic.slug
         }))

@@ -2,20 +2,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-interface Topic {
-  id: number;
-  name: string;
-  description: string;
-  slug: string;
-  documentId: string;
-  blogs: any[];  // for counting blog posts
-}
 
-interface Category {
-  id: number;
-  name: string;
-  topics: Topic[];
-}
 
 async function getTopicsWithCategories() {
   try {

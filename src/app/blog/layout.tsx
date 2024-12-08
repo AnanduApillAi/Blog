@@ -1,6 +1,6 @@
 // app/blog/layout 
 import Header from "@/components/Header"
-import {SearchBar} from "../../components/SearchBar"
+import { SearchBar } from '@/components';
 
 export default function BlogLayout({
   children,

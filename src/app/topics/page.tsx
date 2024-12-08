@@ -54,7 +54,7 @@ export default async function TopicsPage() {
               {category.topics.map((topic) => (
                 <Link 
                   key={topic.id} 
-                  href={`/blog/topics/${topic.slug}`}
+                  href={`/topics/${topic.slug}`}
                   className="block"
                 >
                   <div className="bg-theme-tertiary p-4 rounded-lg hover:bg-opacity-90 transition-all h-full">

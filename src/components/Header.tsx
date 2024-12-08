@@ -55,7 +55,7 @@ const Header = () => {
                   <X size={24} />
                 </button>
               </div>
-              <nav className="space-y-4 flex flex-col md:flex-row">
+              <nav className="space-y-4 flex flex-col lg:flex-row">
                 <NavLinks />
               </nav>
             </div>

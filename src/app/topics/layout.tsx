@@ -1,6 +1,6 @@
 // app/topics/layout
 import Header from "@/components/Header"
-import SearchBar from "../../components/SearchBar"
+import {SearchBar} from "../../components/SearchBar"
 
 export default function TopicLayout({
   children,

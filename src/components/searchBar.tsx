@@ -1,18 +1,19 @@
-// components/SearchBar.tsx
 "use client"
 import { useState, useEffect } from 'react';
 import { Search, Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+
 interface SearchBarProps {
   initialSearch?: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ initialSearch = '' }) => {
+export const SearchBar: React.FC<SearchBarProps> = ({ initialSearch = '' }) => {
   const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [alertMessage, setAlertMessage] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
+
   useEffect(() => {
     setSearchTerm(initialSearch);
   }, [initialSearch]);
@@ -46,7 +47,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ initialSearch = '' }) => {
     }
   };
 
-  return  (
+  return (
     <div className="w-full max-w-2xl mx-auto mt-20">
       <div className="relative">
         <div className={`absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none
@@ -122,5 +123,3 @@ const SearchBar: React.FC<SearchBarProps> = ({ initialSearch = '' }) => {
     </div>
   );
 };
-
-export default SearchBar;

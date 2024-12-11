@@ -10,48 +10,6 @@
   }
   :root {
     /* Background colors */
-    --background-primary: theme('colors.gray.50');
-    --background-secondary: theme('colors.white');
-    --background-tertiary: theme('colors.gray.100');
-    
-    /* Text colors */
-    --text-primary: theme('colors.gray.800');
-    --text-secondary: theme('colors.gray.600');
-    --text-tertiary: theme('colors.gray.500');
-    
-    /* Border colors */
-    --border-primary: theme('colors.gray.200');
-    --border-secondary: theme('colors.gray.300');
-    
-    /* Interactive elements */
-    --hover-background: theme('colors.gray.100');
-    --active-background: theme('colors.gray.200');
-    
-    /* Accent colors */
-    --accent-primary: theme('colors.blue.500');
-    --accent-secondary: theme('colors.blue.600');
-    
-    /* Card and overlay */
-    --card-background: theme('colors.white');
-    --overlay-background: theme('colors.black/50');
-    
-    /* Input fields */
-    --input-background: theme('colors.gray.100');
-    --input-text: theme('colors.gray.800');
-    --input-placeholder: theme('colors.gray.400');
-
-    /* Light theme variations */
-    --portfolio-bg: theme('colors.gray.50');
-    --portfolio-text: theme('colors.gray.900');
-    --portfolio-accent: theme('colors.indigo.500');
-    --portfolio-secondary: theme('colors.gray.600');
-    --portfolio-zinc: theme('colors.gray.200');
-    --portfolio-zinc-hover: theme('colors.gray.300');
-    --portfolio-accent-rgb: 99, 102, 241;
-  }
-
-  .dark {
-    /* Background colors */
     --background-primary: theme('colors.gray.900');
     --background-secondary: theme('colors.gray.800');
     --background-tertiary: theme('colors.gray.700');
@@ -93,6 +51,50 @@
     --portfolio-zinc-hover: theme('colors.zinc.800');
     --portfolio-accent-rgb: 129, 140, 248;
   }
+
+  .light {
+    /* Background colors */
+    --background-primary: theme('colors.gray.50');
+    --background-secondary: theme('colors.white');
+    --background-tertiary: theme('colors.gray.100');
+    
+    /* Text colors */
+    --text-primary: theme('colors.gray.800');
+    --text-secondary: theme('colors.gray.600');
+    --text-tertiary: theme('colors.gray.500');
+    
+    /* Border colors */
+    --border-primary: theme('colors.gray.200');
+    --border-secondary: theme('colors.gray.300');
+    
+    /* Interactive elements */
+    --hover-background: theme('colors.gray.100');
+    --active-background: theme('colors.gray.200');
+    
+    /* Accent colors */
+    --accent-primary: theme('colors.blue.500');
+    --accent-secondary: theme('colors.blue.600');
+    
+    /* Card and overlay */
+    --card-background: theme('colors.white');
+    --overlay-background: theme('colors.black/50');
+    
+    /* Input fields */
+    --input-background: theme('colors.gray.100');
+    --input-text: theme('colors.gray.800');
+    --input-placeholder: theme('colors.gray.400');
+
+    /* Light theme variations */
+    --portfolio-bg: theme('colors.gray.50');
+    --portfolio-text: theme('colors.gray.900');
+    --portfolio-accent: theme('colors.indigo.500');
+    --portfolio-secondary: theme('colors.gray.600');
+    --portfolio-zinc: theme('colors.gray.200');
+    --portfolio-zinc-hover: theme('colors.gray.300');
+    --portfolio-accent-rgb: 99, 102, 241;
+  }
+
+  
 }
 
 /* Custom utility classes that use our variables */

@@ -9,12 +9,12 @@ export default async function RootLayout({
 }) {
   const cookieStore = await cookies();
   const theme = cookieStore.get('theme');
-  const isDark = theme?.value === 'dark';
+  const isLight = theme?.value === 'light';
 
   return (
-    <html lang="en" className={isDark ? 'dark' : ''} suppressHydrationWarning>
+    <html lang="en" className={isLight ? 'light' : ''} suppressHydrationWarning>
       <body className="min-h-screen bg-theme-primary text-theme-primary transition-colors duration-200">
-        <ThemeProvider attribute="class" defaultTheme={isDark ? 'dark' : 'light'}>
+        <ThemeProvider attribute="class" defaultTheme={isLight ? 'light' : 'dark'}>
           {children}
         </ThemeProvider>
       </body>

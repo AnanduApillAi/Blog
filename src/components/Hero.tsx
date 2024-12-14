@@ -229,7 +229,7 @@ const Hero = () => {
             </div>
 
             {/* Social Links */}
-            <div className='flex gap-4 flex-col sm:flex-row justify-start items-center'>
+            <div className='flex gap-4 flex-col sm:flex-row justify-start items-start sm:items-center'>
               <div className="flex gap-4">
                 {[
                   { Icon: FaGithub, label: 'Github', href: 'https://github.com/AnanduA-6' },

@@ -39,7 +39,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="min-h-screen flex flex-col justify-center relative py-16 px-4 md:px-16 w-full lg:w-[80%]">
+    <section id="projects" className="flex flex-col justify-center relative py-16 px-4 md:px-16 w-full lg:w-[80%]">
       <div>
         <h2 
           className="text-3xl sm:text-4xl font-bold mb-12"

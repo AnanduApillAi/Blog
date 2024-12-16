@@ -162,7 +162,7 @@ const Hero = () => {
   ];
 
   return (
-    <section className='py-6'>
+    <section className='py-6 mb-8'>
       <div className="flex flex-col justify-between relative">
 
 
@@ -183,7 +183,7 @@ const Hero = () => {
         <NavIndicator />
 
         {/* Dot pattern background */}
-        <div className="absolute inset-0 grid grid-cols-12 gap-4 opacity-10">
+        <div className="fixed top-0 left-0 inset-0 grid grid-cols-12 gap-4 opacity-5">
           {Array.from({ length: 96 }).map((_, i) => (
             <div
               key={i}

@@ -26,7 +26,7 @@ function RecentBlogs() {
  }
  return (
    <section>
-     <div className="px-4 md:px-16 w-full lg:w-[80%] py-16">
+     <div className="px-4 md:px-16 w-full lg:w-[80%] py-16 z-50 relative">
        <div className="flex justify-between items-center mb-8">
          <h2 className="text-2xl font-bold" style={{ color: 'var(--portfolio-text)' }}>Recent Posts</h2>
          <Link

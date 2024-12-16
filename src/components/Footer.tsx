@@ -15,7 +15,7 @@ const Footer = () => {
 
   return (
     <footer 
-      className="w-full py-8 px-4 md:px-16"
+      className="w-full py-8 px-4 md:px-16 z-50 relative"
       style={{ background: 'var(--portfolio-zinc)' }}
     >
       <div className="max-w-6xl mx-auto">

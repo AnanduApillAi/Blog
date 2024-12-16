@@ -267,7 +267,7 @@ const Hero = () => {
                 className="flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 hover:transform hover:-translate-y-1 w-fit"
                 style={{
                   background: 'var(--portfolio-accent)',
-                  color: 'var(--portfolio-text)'
+                  color: 'white'
                 }}
               >
                 <FaFileDownload className="w-5 h-5" />

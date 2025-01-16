@@ -88,7 +88,7 @@ export default async function BlogPage({ params }: PageProps) {
   }
 
   return (
-    <main className="px-4 py-8">
+    <main className="md:px-4 py-8">
       <article className="bg-theme-secondary rounded-xl shadow-sm overflow-hidden">
         <header className="p-6 border-b border-theme-primary">
           {/* Title */}

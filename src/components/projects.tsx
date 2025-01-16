@@ -2,6 +2,7 @@ import { Github, ExternalLink } from 'lucide-react';
 import dashboard from '../../public/images/dashboard-react.jpg'
 import netflix from '../../public/images/netflix-thumbnail.webp'
 import webSrapper from '../../public/images/web-scapper.jpeg'
+import chessMate from '../../public/images/chess-mate.jpg'
 import Image from 'next/image';
 
 const Projects = () => {
@@ -35,7 +36,18 @@ const Projects = () => {
         github: "https://github.com/AnanduA-6/dashboard-react",
         live: "https://6686490d130ba980e9338239--inquisitive-youtiao-679d03.netlify.app/"
       }
+    },
+    {
+      title:"ChessMate",
+      description:"A multiplayer chess platform with real-time gameplay powered by WebSockets.",
+      image:chessMate,
+      technologies : ["React", "WebSockets","Express.js"],
+      links :{
+        github: "https://github.com/AnanduA-6/chessMate",
+        live: "https://chess-mate.anandu.dev"
+      }
     }
+    
   ];
 
   return (

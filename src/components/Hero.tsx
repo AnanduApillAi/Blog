@@ -232,9 +232,9 @@ const Hero = () => {
             <div className='flex gap-4 flex-col sm:flex-row justify-start items-start sm:items-center'>
               <div className="flex gap-4">
                 {[
-                  { Icon: FaGithub, label: 'Github', href: 'https://github.com/AnanduA-6' },
+                  { Icon: FaGithub, label: 'Github', href: 'https://github.com/AnanduApillAi' },
                   { Icon: FaLinkedinIn, label: 'LinkedIn', href: 'https://www.linkedin.com/in/anandu-dev/' },
-                  { Icon: MdEmail, label: 'Email', href: 'anandu.a.dev@gmail.com' },
+                  { Icon: MdEmail, label: 'Email', href: 'mailto:anandu.a.dev@gmail.com' },
                   { Icon: SiX, label: 'Twiiter', href: 'https://x.com/anandu_a_dev' },
                   { Icon: FaReddit, label: 'Reddit', href: 'https://x.com/anandu_a_dev' }
                 ].map(({ Icon, label, href }) => (

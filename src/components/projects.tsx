@@ -13,7 +13,7 @@ const Projects = () => {
       image: netflix,
       technologies: ["React.js", "Node.js", "MongoDB", "TMDb","Express"],
       links: {
-        github: "https://github.com/AnanduA-6/netflixClone",
+        github: "https://github.com/AnanduApillAi/netflixClone",
         live: "https://playful-treacle-b83101.netlify.app/"
       }
     },
@@ -23,8 +23,8 @@ const Projects = () => {
       image: webSrapper,
       technologies: ["Node.js", "React", "Cheerio","Axios","Express"],
       links: {
-        github: "https://github.com/AnanduA-6/web-scraper",
-        live: "https://github.com/AnanduA-6/web-scraper"
+        github: "https://github.com/AnanduApillAi/web-scraper",
+        live: "https://github.com/AnanduApillAi/web-scraper"
       }
     },
     {
@@ -33,7 +33,7 @@ const Projects = () => {
       image: dashboard,
       technologies: ["React"],
       links: {
-        github: "https://github.com/AnanduA-6/dashboard-react",
+        github: "https://github.com/AnanduApillAi/dashboard-react",
         live: "https://6686490d130ba980e9338239--inquisitive-youtiao-679d03.netlify.app/"
       }
     },
@@ -43,7 +43,7 @@ const Projects = () => {
       image:chessMate,
       technologies : ["React", "WebSockets","Express.js"],
       links :{
-        github: "https://github.com/AnanduA-6/chessMate",
+        github: "https://github.com/AnanduApillAi/chessMate",
         live: "https://chess-mate.anandu.dev"
       }
     }

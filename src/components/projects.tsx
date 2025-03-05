@@ -3,17 +3,28 @@ import dashboard from '../../public/images/dashboard-react.jpg'
 import netflix from '../../public/images/netflix-thumbnail.webp'
 import webSrapper from '../../public/images/web-scapper.jpeg'
 import chessMate from '../../public/images/chess-mate.jpg'
+import codEX from '../../public/images/codex.jpg'
 import Image from 'next/image';
 
 const Projects = () => {
   const projects = [
+    {
+      title:"CodEX",
+      description:"A platform for saving code snippets with rendering preview",
+      image:codEX,
+      technologies:["Next.js","Tailwind CSS","Shadcn UI","IndexedDB"],
+      links:{
+        github:"https://github.com/AnanduApillAi/codex",
+        live:"https://codex.anandu.dev"
+      }
+    },
     {
       title: "Netflix Clone",
       description: "Netflix clone created using React and integrated with the Movie Database (TMDb) API.",
       image: netflix,
       technologies: ["React.js", "Node.js", "MongoDB", "TMDb","Express"],
       links: {
-        github: "https://github.com/AnanduA-6/netflixClone",
+        github: "https://github.com/AnanduApillAi/netflixClone",
         live: "https://playful-treacle-b83101.netlify.app/"
       }
     },
@@ -23,18 +34,8 @@ const Projects = () => {
       image: webSrapper,
       technologies: ["Node.js", "React", "Cheerio","Axios","Express"],
       links: {
-        github: "https://github.com/AnanduA-6/web-scraper",
-        live: "https://github.com/AnanduA-6/web-scraper"
-      }
-    },
-    {
-      title: "Demo Employee Dashboard",
-      description: "An Employee dashboard (webview) created with React",
-      image: dashboard,
-      technologies: ["React"],
-      links: {
-        github: "https://github.com/AnanduA-6/dashboard-react",
-        live: "https://6686490d130ba980e9338239--inquisitive-youtiao-679d03.netlify.app/"
+        github: "https://github.com/AnanduApillAi/web-scraper",
+        live: "https://github.com/AnanduApillAi/web-scraper"
       }
     },
     {
@@ -43,7 +44,7 @@ const Projects = () => {
       image:chessMate,
       technologies : ["React", "WebSockets","Express.js"],
       links :{
-        github: "https://github.com/AnanduA-6/chessMate",
+        github: "https://github.com/AnanduApillAi/chessMate",
         live: "https://chess-mate.anandu.dev"
       }
     }

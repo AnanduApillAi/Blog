@@ -6,9 +6,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   const socialLinks = [
-    { icon: FaGithub, label: 'Github', href: 'https://github.com/AnanduA-6' },
+    { icon: FaGithub, label: 'Github', href: 'https://github.com/AnanduApillAi' },
     { icon: FaLinkedinIn, label: 'LinkedIn', href: 'https://www.linkedin.com/in/anandu-dev/' },
-    { icon: MdEmail, label: 'Email', href: 'anandu.a.dev@gmail.com' },
+    { icon: MdEmail, label: 'Email', href: 'mailto:anandu.a.dev@gmail.com' },
     { icon: SiX, label: 'Twiiter', href: 'https://x.com/anandu_a_dev' },
     { icon: FaReddit, label: 'Reddit', href: 'https://x.com/anandu_a_dev' }
   ];

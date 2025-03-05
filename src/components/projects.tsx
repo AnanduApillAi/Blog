@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 const Projects = () => {
   const projects = [
-    {
+    { 
       title:"CodEX",
       description:"A platform for saving code snippets with rendering preview",
       image:codEX,

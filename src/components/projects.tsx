@@ -4,6 +4,7 @@ import netflix from '../../public/images/netflix-thumbnail.webp'
 import webSrapper from '../../public/images/web-scapper.jpeg'
 import chessMate from '../../public/images/chess-mate.jpg'
 import codEX from '../../public/images/codex.jpg'
+import formBuilder from '../../public/images/form-Builder.webp'
 import Image from 'next/image';
 
 const Projects = () => {
@@ -16,6 +17,16 @@ const Projects = () => {
       links:{
         github:"https://github.com/AnanduApillAi/codex",
         live:"https://codex.anandu.dev"
+      }
+    },
+    {
+      title:"Form Builder",
+      description:"A platform for creating forms with drag and drop interface and ai and allows to export the form as a json file",
+      image:formBuilder,
+      technologies:["Next.js","Tailwind CSS","Kendo UI","Generative AI", "OpenAI"],
+      links:{
+        github:"https://github.com/AnanduApillAi/kendo-forms",
+        live:"https://kendo-forms.vercel.app/"
       }
     },
     {

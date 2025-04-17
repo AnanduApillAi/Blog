@@ -262,7 +262,7 @@ const Hero = () => {
               {/* Add this inside your Hero component, after the paragraph */}
               <button
                 onClick={() => {
-                  window.open('/Anandu_Resume.pdf#toolbar=0&navpanes=0&view=FitH', 'Anandu A - Resume');
+                  window.open('/Anandu_FullstackDev.pdf#toolbar=0&navpanes=0&view=FitH', 'Anandu A - Resume');
                 }}
                 className="flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 hover:transform hover:-translate-y-1 w-fit"
                 style={{

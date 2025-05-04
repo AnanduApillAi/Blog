@@ -20,6 +20,16 @@ const Projects = () => {
       }
     },
     {
+      title:"ChessMate",
+      description:"A multiplayer chess platform with real-time gameplay powered by WebSockets.",
+      image:chessMate,
+      technologies : ["React", "WebSockets","Express.js"],
+      links :{
+        github: "https://github.com/AnanduApillAi/chessMate",
+        live: "https://chess-mate.anandu.dev"
+      }
+    },
+    {
       title:"Form Builder",
       description:"A platform for creating forms with drag and drop interface and ai and allows to export the form as a json file",
       image:formBuilder,
@@ -47,16 +57,6 @@ const Projects = () => {
       links: {
         github: "https://github.com/AnanduApillAi/web-scraper",
         live: "https://github.com/AnanduApillAi/web-scraper"
-      }
-    },
-    {
-      title:"ChessMate",
-      description:"A multiplayer chess platform with real-time gameplay powered by WebSockets.",
-      image:chessMate,
-      technologies : ["React", "WebSockets","Express.js"],
-      links :{
-        github: "https://github.com/AnanduApillAi/chessMate",
-        live: "https://chess-mate.anandu.dev"
       }
     }
     

@@ -3,7 +3,7 @@
 const Experience = () => {
   const experiences = [
     {
-      title: "Full Stack Developer",
+      title: "Front End Developer",
       company: "Tapclone",
       period: "November 2022 - June 2023",
       description: `
@@ -11,10 +11,10 @@ const Experience = () => {
         Focused on improving the frontend experience using React.js while ensuring the backend was robust and efficient. 
         Collaborated closely with the team to deliver projects on time and with great results.
       `,
-      technologies: ["React", "Javascript", "TailwindCSS", "Node.js"]
+      technologies: ["React", "Javascript", "TailwindCSS", "Node.js",'Next.js','TypeScript']
     },
     {
-      title: "Full Stack Developer",
+      title: "Front End Developer",
       company: "Extravelmoney",
       period: "July 2023 - Present",
       description: `
@@ -22,18 +22,18 @@ const Experience = () => {
         Worked on making the user interface intuitive and the backend workflows seamless. 
         Took ownership of PHP tasks, improving efficiency and reliability across their systems.
       `,
-      technologies: ["PHP", "React", "Node.js", "Express", "MySQL","MongoDB"]
+      technologies: ["PHP", "React","Next.js", "TypeScript", "TailwindCSS", "REST APIs", 'JavaScript','Jest']
     },
     {
-      title: "Front-End Consultant",
+      title: "Front-End Developer Consultant",
       company: "Veeble Hosting",
-      period: "2024 - Present",
+      period: "2023 - Present",
       description: `
         Providing front-end expertise to enhance the look and feel of their hosting platform. 
         Focused on creating clean, responsive designs and ensuring a smooth user experience. 
         Worked closely with the team to align the frontend with their technical goals.
       `,
-      technologies: ["React", "CSS", "HTML", "JavaScript"]
+      technologies: ["React", "CSS", "HTML", "JavaScript", "Next.js", "TypeScript", "TailwindCSS", "REST APIs", 'Jest', 'Storybook', 'Shadcn/UI']
     }
   ];
   

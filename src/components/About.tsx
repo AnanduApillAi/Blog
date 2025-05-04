@@ -13,10 +13,10 @@ const About = () => {
         <div className="">
           <div className="space-y-6">
             <p style={{ color: 'var(--portfolio-secondary)' }} className="text-lg">
-            I am a self-taught Full Stack Developer with a passion for crafting seamless and impactful digital experiences. My journey into software development is driven by curiosity, problem-solving, and a love for innovation.
+            I am a self-taught Front End Engineer with a passion for crafting seamless and impactful digital experiences. My journey into software development is driven by curiosity, problem-solving, and a love for innovation.
             </p>
             <p style={{ color: 'var(--portfolio-secondary)' }} className="text-lg">
-            With expertise spanning both frontend and backend development, I specialize in designing scalable, maintainable, and performance-driven solutions. My skill set includes modern technologies like React, Node.js, PostgreSQL, and TypeScript, enabling me to deliver projects that are not just functional but also delightful to use.
+            With expertise spanning both frontend and backend development, I specialize in designing scalable, maintainable, and performance-driven solutions. My skill set includes modern technologies like React, Next.js, TypeScript, TailwindCSS, JavaScript, HTML/CSS, Redux, Jest, Storybook, and Cypress, enabling me to deliver projects that are not just functional but also delightful to use.
             </p>
             <p style={{ color: 'var(--portfolio-secondary)' }} className="text-lg">
             I am particularly focused on building accessible, user-friendly applications that solve real-world problems. I believe in combining clean design with efficient code, ensuring that every project I undertake adheres to industry best practices and standards.

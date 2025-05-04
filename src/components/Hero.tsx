@@ -1,14 +1,14 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 
-import { FaGithub, FaLinkedinIn, FaReddit, FaFileDownload } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn, FaFileDownload } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { BiCode } from "react-icons/bi";
 import { SiX } from "react-icons/si";
 import { ThemeToggle } from './ThemeToggle';
 import Link from 'next/link';
 
-const TypeWriter = ({ text, speed = 100 }) => {
+const TypeWriter = ({ text, speed = 100 }: { text: string, speed?: number }) => {
   const [displayText, setDisplayText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
 
@@ -126,7 +126,7 @@ const NavIndicator = () => {
   );
 };
 
-const TechStackScroll = ({ techs, direction = 'right' }) => (
+const TechStackScroll = ({ techs, direction = 'right' }: { techs: string[], direction?: string }) => (
   <div className="overflow-hidden whitespace-nowrap py-1">
     <div
       className={`inline-block animate-scroll-${direction}`}
@@ -154,7 +154,7 @@ const TechStackScroll = ({ techs, direction = 'right' }) => (
 
 const Hero = () => {
   const frontendTechs = [
-    'React', 'Next.js', 'TypeScript', 'TailwindCSS', 'JavaScript', 'HTML/CSS', 'Redux'
+    'React', 'Next.js', 'TypeScript', 'TailwindCSS', 'JavaScript', 'HTML/CSS', 'Redux', 'Jest', 'Storybook', 'Cypress'
   ];
 
   const backendTechs = [
@@ -220,7 +220,7 @@ const Hero = () => {
                 className="text-2xl sm:text-3xl font-semibold"
                 style={{ color: 'var(--portfolio-text)' }}
               >
-                Software Engineer / Full Stack Developer
+                Front End Engineer
               </h2>
 
               <p style={{ color: 'var(--portfolio-secondary)' }} className="text-lg sm:text-xl">
@@ -233,10 +233,9 @@ const Hero = () => {
               <div className="flex gap-4">
                 {[
                   { Icon: FaGithub, label: 'Github', href: 'https://github.com/AnanduApillAi' },
-                  { Icon: FaLinkedinIn, label: 'LinkedIn', href: 'https://www.linkedin.com/in/anandu-dev/' },
+                  { Icon: FaLinkedinIn, label: 'LinkedIn', href: 'https://www.linkedin.com/in/ananduapillai' },
                   { Icon: MdEmail, label: 'Email', href: 'mailto:anandu.a.dev@gmail.com' },
-                  { Icon: SiX, label: 'Twiiter', href: 'https://x.com/anandu_a_dev' },
-                  { Icon: FaReddit, label: 'Reddit', href: 'https://x.com/anandu_a_dev' }
+                  { Icon: SiX, label: 'Twiiter', href: 'https://x.com/ananduapillai' },
                 ].map(({ Icon, label, href }) => (
                   <a
                     key={label}
@@ -262,7 +261,7 @@ const Hero = () => {
               {/* Add this inside your Hero component, after the paragraph */}
               <button
                 onClick={() => {
-                  window.open('/Anandu_FullstackDev.pdf#toolbar=0&navpanes=0&view=FitH', 'Anandu A - Resume');
+                  window.open('/Anandu A Pillai.pdf#toolbar=0&navpanes=0&view=FitH', 'Anandu A - Resume');
                 }}
                 className="flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-200 hover:transform hover:-translate-y-1 w-fit"
                 style={{
